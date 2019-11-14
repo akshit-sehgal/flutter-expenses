@@ -50,6 +50,31 @@ class MyHomePage extends StatelessWidget {
             ),
             width: double.infinity,
           ),
+          Card(
+            child: Container(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Title',
+                    ),
+                  ),
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Amount',
+                    ),
+                  ),
+                  FlatButton(
+                    child: Text('Add Transaction'),
+                    textColor: Colors.purple,
+                    onPressed: (){},
+                  )
+                ],
+              ),
+            ),
+          ),
           Column(
             children: <Widget>[
               ...(transactions
@@ -74,6 +99,7 @@ class MyHomePage extends StatelessWidget {
                                   )),
                             ),
                             Column(
+                              // mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
