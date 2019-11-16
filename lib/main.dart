@@ -11,9 +11,25 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Personal Expenses',
       theme: ThemeData(
-        primarySwatch: Colors.red,
-        accentColor: Colors.orange,
-        // appBarTheme: AppBarTheme(color:Colors.black)
+        primarySwatch: Colors.purple,
+        accentColor: Colors.amber,
+        textTheme:
+            ThemeData.light().textTheme.apply(fontFamily: 'Quicksand').copyWith(
+                  title: TextStyle(
+                    fontFamily: 'OpenSans',
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+        appBarTheme: AppBarTheme(
+          textTheme: ThemeData.light().textTheme.copyWith(
+                title: TextStyle(
+                  fontFamily: 'OpenSans',
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+        ),
       ),
       home: MyHomePage(),
     );
@@ -27,24 +43,24 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> transactions = [
-    Transaction(
-      id: 't1',
-      title: 'Mobile Phone',
-      amount: 500,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Shoes',
-      amount: 250,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't3',
-      title: 'Food',
-      amount: 100,
-      date: DateTime.now(),
-    )
+    // Transaction(
+    //   id: 't1',
+    //   title: 'Mobile Phone',
+    //   amount: 500,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: 't2',
+    //   title: 'Shoes',
+    //   amount: 250,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: 't3',
+    //   title: 'Food',
+    //   amount: 100,
+    //   date: DateTime.now(),
+    // )
   ];
   void _addTransaction(String title, double amount) {
     final Transaction newTransaction = Transaction(
@@ -99,6 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
+        foregroundColor: Colors.white,
         onPressed: () => _startAddNewTransaction(context),
       ),
     );
