@@ -20,17 +20,19 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Expenses'),
       ),
-      body: Column(
-        children: <Widget>[
-          Container(
-            child: Card(
-              child: Text('Charts'),
-              elevation: 5,
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Container(
+              child: Card(
+                child: Text('Charts'),
+                elevation: 5,
+              ),
+              width: double.infinity,
             ),
-            width: double.infinity,
-          ),
-          UserTransactions(),
-        ],
+            UserTransactions(),
+          ],
+        ),
       ),
     );
   }

@@ -32,7 +32,7 @@ class NewTransaction extends StatelessWidget {
               onPressed: () {
                 addTransaction(
                   titleController.text,
-                  double.parse(amountController.text.toString()),
+                  double.parse(amountController.text),
                 );
               },
             )
