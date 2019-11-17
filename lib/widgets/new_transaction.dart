@@ -15,9 +15,10 @@ class _NewTransactionState extends State<NewTransaction> {
   final _amountController = TextEditingController();
   DateTime _selectedDate;
   void _submitData() {
+    if (_amountController.text.isEmpty) return;
     final title = _titleController.text;
     final amount = double.parse(_amountController.text);
-    if (title.isEmpty || amount <= 0) return;
+    if (title.isEmpty || amount <= 0 || _selectedDate == null) return;
     widget.addTransaction(title, amount, _selectedDate);
     Navigator.of(context).pop();
   }

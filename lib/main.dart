@@ -111,14 +111,13 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
+      body: Column(
           children: <Widget>[
             Chart(_recentTransactions),
-            TransactionList(_transactions, _deleteTransaction),
+            Expanded(child: TransactionList(_transactions, _deleteTransaction)),
           ],
         ),
-      ),
+      
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
