@@ -16,12 +16,12 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.amber,
         textTheme:
             ThemeData.light().textTheme.apply(fontFamily: 'Quicksand').copyWith(
-                  title: TextStyle(
-                    fontFamily: 'OpenSans',
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                title: TextStyle(
+                  fontFamily: 'OpenSans',
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
                 ),
+                button: TextStyle(color: Colors.white)),
         appBarTheme: AppBarTheme(
           textTheme: ThemeData.light().textTheme.copyWith(
                 title: TextStyle(
@@ -70,11 +70,11 @@ class _MyHomePageState extends State<MyHomePage> {
         .toList();
   }
 
-  void _addTransaction(String title, double amount) {
+  void _addTransaction(String title, double amount, DateTime date) {
     final Transaction newTransaction = Transaction(
       title: title,
       amount: amount,
-      date: DateTime.now(),
+      date: date,
       id: DateTime.now().toString(),
     );
     print(newTransaction.id);
@@ -100,7 +100,6 @@ class _MyHomePageState extends State<MyHomePage> {
           IconButton(
             icon: Icon(
               Icons.add,
-              color: Colors.white,
             ),
             onPressed: () => _startAddNewTransaction(context),
           ),
@@ -117,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        foregroundColor: Colors.white,
+        foregroundColor: Theme.of(context).textTheme.button.color,
         onPressed: () => _startAddNewTransaction(context),
       ),
     );
