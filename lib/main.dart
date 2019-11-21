@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import './widgets/transaction_list.dart';
@@ -99,6 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void _startAddNewTransaction(BuildContext context) {
     showModalBottomSheet(
         context: context,
+        isScrollControlled: true,
         builder: (bCtx) {
           return NewTransaction(_addTransaction);
         });
@@ -107,8 +110,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final _mediaQuery = MediaQuery.of(context);
-    final isLandscape =
-        _mediaQuery.orientation == Orientation.landscape;
+    final isLandscape = _mediaQuery.orientation == Orientation.landscape;
     final appBar = AppBar(
       title: Text('Personal Expenses'),
       actions: <Widget>[
@@ -137,7 +139,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text('Show Chart'),
-                  Switch(
+                  Switch.adaptive(
+                    activeColor: Theme.of(context).accentColor,
                     value: _showChart,
                     onChanged: (value) {
                       setState(() {
@@ -170,11 +173,13 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        foregroundColor: Theme.of(context).textTheme.button.color,
-        onPressed: () => _startAddNewTransaction(context),
-      ),
+      floatingActionButton: Platform.isIOS
+          ? Container()
+          : FloatingActionButton(
+              child: Icon(Icons.add),
+              foregroundColor: Theme.of(context).textTheme.button.color,
+              onPressed: () => _startAddNewTransaction(context),
+            ),
     );
   }
 }
