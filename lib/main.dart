@@ -111,14 +111,14 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final _mediaQuery = MediaQuery.of(context);
     final isLandscape = _mediaQuery.orientation == Orientation.landscape;
-    final PreferredSizeWidget appBar = !Platform.isIOS
+    final PreferredSizeWidget appBar = Platform.isIOS
         ? CupertinoNavigationBar(
             middle: Text('Personal Expenses'),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 GestureDetector(
-                    onTap: ()=>_startAddNewTransaction(context),
+                    onTap: () => _startAddNewTransaction(context),
                     child: Icon(CupertinoIcons.add)),
               ],
             ),
@@ -141,45 +141,50 @@ class _MyHomePageState extends State<MyHomePage> {
           0.8,
       child: TransactionList(_transactions, _deleteTransaction),
     );
-    final _body = SingleChildScrollView(
-      child: Column(
-        children: <Widget>[
-          if (isLandscape)
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text('Show Chart'),
-                Switch.adaptive(
-                  activeColor: Theme.of(context).accentColor,
-                  value: _showChart,
-                  onChanged: (value) {
-                    setState(() {
-                      _showChart = value;
-                    });
-                  },
-                ),
-              ],
-            ),
-          if (!isLandscape)
-            Container(
-              height: (_mediaQuery.size.height -
-                      appBar.preferredSize.height -
-                      _mediaQuery.padding.top) *
-                  0.3,
-              child: Chart(_recentTransactions),
-            ),
-          if (!isLandscape) _txList,
-          if (isLandscape)
-            _showChart
-                ? Container(
-                    height: (_mediaQuery.size.height -
-                            appBar.preferredSize.height -
-                            _mediaQuery.padding.top) *
-                        0.7,
-                    child: Chart(_recentTransactions),
-                  )
-                : _txList,
-        ],
+    final _body = SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            if (isLandscape)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Show Chart',
+                    style: Theme.of(context).textTheme.title,
+                  ),
+                  Switch.adaptive(
+                    activeColor: Theme.of(context).accentColor,
+                    value: _showChart,
+                    onChanged: (value) {
+                      setState(() {
+                        _showChart = value;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            if (!isLandscape)
+              Container(
+                height: (_mediaQuery.size.height -
+                        appBar.preferredSize.height -
+                        _mediaQuery.padding.top) *
+                    0.3,
+                child: Chart(_recentTransactions),
+              ),
+            if (!isLandscape) _txList,
+            if (isLandscape)
+              _showChart
+                  ? Container(
+                      height: (_mediaQuery.size.height -
+                              appBar.preferredSize.height -
+                              _mediaQuery.padding.top) *
+                          0.7,
+                      child: Chart(_recentTransactions),
+                    )
+                  : _txList,
+          ],
+        ),
       ),
     );
     return Platform.isIOS
